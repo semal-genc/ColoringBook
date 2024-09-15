@@ -51,6 +51,12 @@ public class FloodFill : MonoBehaviour
     {
         if (spriteRenderer == null) return;
 
+        // UI'ya týklanýp týklanmadýðýný kontrol et
+        if (IsPointerOverUI())
+        {
+            return; // Eðer UI'ya týklandýysa, boyama iþlemini yapma
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
             // Fare pozisyonunu al
@@ -174,4 +180,10 @@ public class FloodFill : MonoBehaviour
         return pixelPosition.x >= 0 && pixelPosition.x < texture.width &&
                pixelPosition.y >= 0 && pixelPosition.y < texture.height;
     }
+
+    private bool IsPointerOverUI()
+    {
+        return UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject();
+    }
+
 }

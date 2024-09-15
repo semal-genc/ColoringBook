@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Coloring Game/Scenes/7.Coloring Game Finish.unity
+    path: Assets/Coloring Game/Scenes/Game/7.Coloring Game Finish.unity
     guid: f3b298a7dbfc05241843dbf43eceea0a
   m_configObjects: {}

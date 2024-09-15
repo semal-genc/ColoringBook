@@ -22,7 +22,7 @@ public class PencilContainer : MonoBehaviour
     void Start()
     {
         unselectedPosition = pencilParent.anchoredPosition;
-        selectedPosition = unselectedPosition + moveMagnitude * Vector2.right;
+        selectedPosition = unselectedPosition + moveMagnitude * Vector2.up;
     }
 
     // Update is called once per frame

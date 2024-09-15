@@ -1,12 +1,12 @@
 fileFormatVersion: 2
-guid: 96be44998e7cc124ca9d34e593d24794
+guid: ef896cf26c423a84f9b5047667fa78e2
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -21,7 +21,7 @@ TextureImporter:
     heightScale: 0.25
     normalMapFilter: 0
     flipGreenChannel: 0
-  isReadable: 1
+  isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 2
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -71,7 +71,7 @@ TextureImporter:
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: 4
+    textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: animal-outline-ugly-rabbit_1308-72102_0
+      name: e4aeba07-ea0c-41f2-9d80-fb8cc66d2367_0
       rect:
         serializedVersion: 2
-        x: 26
-        y: 26
-        width: 209
-        height: 175
+        x: 293
+        y: 1844
+        width: 7508
+        height: 5125
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,8 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7836b49ec7ca9c44e91ad06eb2f59fdd
-      internalID: -933974262
+      spriteID: ec65be0e839758e4d99bd14df66ff833
+      internalID: -1563189120
       vertices: []
       indices: 
       edges: []
@@ -141,7 +141,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      animal-outline-ugly-rabbit_1308-72102_0: -933974262
+      e4aeba07-ea0c-41f2-9d80-fb8cc66d2367_0: -1563189120
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
