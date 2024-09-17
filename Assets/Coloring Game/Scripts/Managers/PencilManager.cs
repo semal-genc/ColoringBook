@@ -6,7 +6,8 @@ public class PencilManager : MonoBehaviour
     [Header("Elements")]
     [SerializeField] private PencilContainer pencilContainerPrefab;
     [SerializeField] private Transform pencilContainersParent;
-    [SerializeField] private FloodFill floodFill;
+    [SerializeField] private List<FloodFill> floodFillObjects; // Birden fazla FloodFill objesi
+    private FloodFill activeFloodFill;
 
     [Header("Settings")]
     [SerializeField] private Color[] colors;
@@ -24,10 +25,9 @@ public class PencilManager : MonoBehaviour
     private List<PencilContainer> activePencilContainers = new List<PencilContainer>();
     private PencilContainer previousPencilContainer;
 
-    // Start is called before the first frame update
     void Start()
     {
-        floodFill = FindObjectOfType<FloodFill>();
+        SetActiveFloodFill(); // Baþlangýçta aktif FloodFill'i bulalým
         ShowPencils(colors);
     }
 
@@ -35,7 +35,7 @@ public class PencilManager : MonoBehaviour
     {
         ShowPencils(colors);
     }
-    
+
     public void KirmiziPencils()
     {
         ShowPencils(kirmizi);
@@ -45,12 +45,12 @@ public class PencilManager : MonoBehaviour
     {
         ShowPencils(pembe);
     }
-    
+
     public void SariPencils()
     {
         ShowPencils(sari);
     }
-    
+
     public void TuruncuPencils()
     {
         ShowPencils(turuncu);
@@ -60,12 +60,12 @@ public class PencilManager : MonoBehaviour
     {
         ShowPencils(yesil);
     }
-    
+
     public void KMaviPencils()
     {
         ShowPencils(kMavi);
     }
-    
+
     public void MorPencils()
     {
         ShowPencils(mor);
@@ -75,7 +75,7 @@ public class PencilManager : MonoBehaviour
     {
         ShowPencils(mavi);
     }
-    
+
     public void GriPencils()
     {
         ShowPencils(gri);
@@ -83,18 +83,34 @@ public class PencilManager : MonoBehaviour
 
     private void Update()
     {
-        if (!floodFill)
+        if (!activeFloodFill || !activeFloodFill.gameObject.activeInHierarchy)
         {
-            floodFill = FindObjectOfType<FloodFill>();
+            // Eðer aktif FloodFill objesi devre dýþýysa baþka bir aktif FloodFill objesi seç
+            SetActiveFloodFill();
+        }
+    }
+
+    private void SetActiveFloodFill()
+    {
+        foreach (var floodFill in floodFillObjects)
+        {
+            if (floodFill.gameObject.activeInHierarchy)
+            {
+                activeFloodFill = floodFill;
+                break; // Ýlk aktif objeyi bulduðumuzda döngüden çýkarýz
+            }
+        }
+
+        if (!activeFloodFill)
+        {
+            Debug.LogError("Aktif FloodFill objesi bulunamadý!");
         }
     }
 
     private void ShowPencils(Color[] colorsToShow)
     {
-        // Hide all existing pencil containers
         HideAllPencils();
 
-        // Create and show the selected pencils
         activePencilContainers.Clear();
         foreach (Color color in colorsToShow)
         {
@@ -102,7 +118,6 @@ public class PencilManager : MonoBehaviour
             activePencilContainers.Add(pencilContainer);
         }
 
-        // Show only the active pencils
         foreach (var container in activePencilContainers)
         {
             container.gameObject.SetActive(true);
@@ -141,9 +156,9 @@ public class PencilManager : MonoBehaviour
 
         previousPencilContainer = pencilContainer;
 
-        if (floodFill != null)
+        if (activeFloodFill != null)
         {
-            floodFill.SetFillColor(pencilContainer.GetColor());
+            activeFloodFill.SetFillColor(pencilContainer.GetColor());
         }
     }
 }
