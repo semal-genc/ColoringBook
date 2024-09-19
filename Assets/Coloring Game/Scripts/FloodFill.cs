@@ -3,14 +3,17 @@ using UnityEngine;
 
 public class FloodFill : MonoBehaviour
 {
+    [Header("Settings")]
     [SerializeField] private Texture2D texture;
     [SerializeField] private Color fillColor = Color.red;
     [SerializeField] private Color boundaryColor = Color.black;
     [SerializeField] private Color targetColor = Color.white;
     [SerializeField] private float colorTolerance = 0.55f;
+
+    [Header("Zoom Settings")]
     [SerializeField] private float zoomSpeed = 0.1f;
-    [SerializeField] private float maxZoom = 2.0f;
-    [SerializeField] private float dragSpeed = 0.005f;
+    [SerializeField] private float maxZoom = 3.0f;
+    [SerializeField] private float dragSpeed = 0.05f;
 
     private SpriteRenderer spriteRenderer;
     private HashSet<Vector2Int> originalBoundaryPixels = new HashSet<Vector2Int>();

@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class MainMenuControl : MonoBehaviour
 {
+    [Header("Settings")]
     [SerializeField] private GameObject pencilUI;
     [SerializeField] private GameObject menuUI;
 

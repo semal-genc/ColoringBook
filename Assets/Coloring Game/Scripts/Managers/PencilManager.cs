@@ -83,9 +83,8 @@ public class PencilManager : MonoBehaviour
 
     private void Update()
     {
-        if (!activeFloodFill || !activeFloodFill.gameObject.activeInHierarchy)
+        if (activeFloodFill == null || !activeFloodFill.gameObject.activeInHierarchy)
         {
-            // Eðer aktif FloodFill objesi devre dýþýysa baþka bir aktif FloodFill objesi seç
             SetActiveFloodFill();
         }
     }
@@ -97,14 +96,11 @@ public class PencilManager : MonoBehaviour
             if (floodFill.gameObject.activeInHierarchy)
             {
                 activeFloodFill = floodFill;
-                break; // Ýlk aktif objeyi bulduðumuzda döngüden çýkarýz
+                return; // Ýlk aktif objeyi bulduðumuzda döngüden çýkarýz
             }
         }
 
-        if (!activeFloodFill)
-        {
-            Debug.LogError("Aktif FloodFill objesi bulunamadý!");
-        }
+        activeFloodFill = null; // Aktif FloodFill bulunamadýysa sýfýrla
     }
 
     private void ShowPencils(Color[] colorsToShow)
