@@ -8,12 +8,17 @@ public class MainMenuControl : MonoBehaviour
     [SerializeField] private GameObject menuUI;
 
     // Tüm karakter nesnelerini listeye alýyoruz
-    [SerializeField] private List<GameObject> characters;
+    CharacterManager characterManager;
+
+    private void Start()
+    {
+        characterManager=FindObjectOfType<CharacterManager>();
+    }
 
     // Ýndeks numarasýna göre karakter seçimi yap
     public void SelectCharacter(int characterIndex)
     {
-        if (characterIndex < 0 || characterIndex >= characters.Count)
+        if (characterIndex < 0 || characterIndex >= characterManager.characters.Count)
         {
             Debug.LogError("Geçersiz karakter indeksi!");
             return;
@@ -22,9 +27,9 @@ public class MainMenuControl : MonoBehaviour
         pencilUI.SetActive(true);
         menuUI.SetActive(false);
 
-        for (int i = 0; i < characters.Count; i++)
+        for (int i = 0; i < characterManager.characters.Count; i++)
         {
-            characters[i].SetActive(i == characterIndex);
+            characterManager.characters[i].SetActive(i == characterIndex);
         }
     }
 
@@ -34,7 +39,7 @@ public class MainMenuControl : MonoBehaviour
         pencilUI.SetActive(false);
         menuUI.SetActive(true);
 
-        foreach (GameObject character in characters)
+        foreach (GameObject character in characterManager.characters)
         {
             character.SetActive(false);
         }

@@ -1,34 +1,30 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class FloodFill : MonoBehaviour
 {
     [Header("Settings")]
     [SerializeField] private Texture2D texture;
-    [SerializeField] private Color fillColor = Color.red;
-    [SerializeField] private Color boundaryColor = Color.black;
-    [SerializeField] private Color targetColor = Color.white;
-    [SerializeField] private float colorTolerance = 0.55f;
-
-    [Header("Zoom Settings")]
-    [SerializeField] private float zoomSpeed = 0.1f;
-    [SerializeField] private float maxZoom = 3.0f;
-    [SerializeField] private float dragSpeed = 0.05f;
 
     private SpriteRenderer spriteRenderer;
     private HashSet<Vector2Int> originalBoundaryPixels = new HashSet<Vector2Int>();
+
     private Vector3 originalScale;
     private Vector3 originalPosition;
-    private Camera mainCamera;
     private Vector3 touchStart;
-
-    private float minX, maxX, minY, maxY;
     private Vector3 previousCameraPosition;
+
+    private bool isDragging = false;
+    private Camera mainCamera;
+    private float minX, maxX, minY, maxY;
+
+    private PencilManager pencilManager;
 
     private void Start()
     {
+        pencilManager = FindObjectOfType<PencilManager>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-
         if (spriteRenderer == null)
         {
             Debug.LogError("SpriteRenderer component not found.");
@@ -36,48 +32,40 @@ public class FloodFill : MonoBehaviour
         }
 
         StoreOriginalBoundaryPixels();
-
         originalScale = transform.localScale;
         originalPosition = transform.position;
-
         mainCamera = Camera.main;
-
         CalculateBounds();
         previousCameraPosition = mainCamera.transform.position;
+    }
+
+    public void UpdateTargetColor(Vector2Int pixelPosition)
+    {
+        if (IsPixelValid(pixelPosition))
+        {
+            pencilManager.targetColor = texture.GetPixel(pixelPosition.x, pixelPosition.y);
+        }
     }
 
     private void Update()
     {
         HandleTouchInput();
 
-        if (spriteRenderer == null || IsPointerOverUI())
-        {
+        if (spriteRenderer == null)
             return;
-        }
 
-        if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Began)
+        // Tek dokunmada boyama yap
+        if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Ended && !isDragging)
         {
+            // UI üzerinde olup olmadýðýmýzý kontrol edelim
+            if (IsPointerOverUI()) return;
+
             Vector2 touchPosition = Input.GetTouch(0).position;
             Vector2 worldPosition = Camera.main.ScreenToWorldPoint(touchPosition);
             Vector2Int pixelPosition = WorldToPixel(worldPosition);
 
-            if (IsPixelValid(pixelPosition))
-            {
-                Color clickedColor = texture.GetPixel(pixelPosition.x, pixelPosition.y);
-                targetColor = clickedColor;
-
-                FloodFillArea(pixelPosition, fillColor);
-            }
-        }
-    }
-
-    private void LateUpdate()
-    {
-        // Optimize camera movement calculations
-        if (mainCamera.transform.position != previousCameraPosition)
-        {
-            LimitCameraToBounds();
-            previousCameraPosition = mainCamera.transform.position;
+            UpdateTargetColor(pixelPosition);
+            FloodFillArea(pixelPosition, pencilManager.fillColor);
         }
     }
 
@@ -90,33 +78,36 @@ public class FloodFill : MonoBehaviour
             if (touch.phase == TouchPhase.Began)
             {
                 touchStart = mainCamera.ScreenToWorldPoint(touch.position);
+                isDragging = false;
             }
 
+            // Eðer dokunma hareket ettiriliyorsa sürükleme moduna geçiyoruz
             if (touch.phase == TouchPhase.Moved && IsImageZoomed())
             {
                 Vector3 direction = touchStart - mainCamera.ScreenToWorldPoint(touch.position);
-                mainCamera.transform.position += direction * dragSpeed;
-
-                // Trigger LateUpdate() to handle boundary limits
+                mainCamera.transform.position += direction * pencilManager.dragSpeed;
+                isDragging = true;
             }
         }
         else if (Input.touchCount == 2)
         {
-            Touch touch1 = Input.GetTouch(0);
-            Touch touch2 = Input.GetTouch(1);
-
-            Vector2 touch1PrevPos = touch1.position - touch1.deltaPosition;
-            Vector2 touch2PrevPos = touch2.position - touch2.deltaPosition;
-
-            float prevMagnitude = (touch1PrevPos - touch2PrevPos).magnitude;
-            float currentMagnitude = (touch1.position - touch2.position).magnitude;
-
-            float difference = currentMagnitude - prevMagnitude;
-
-            Zoom(difference * zoomSpeed);
-
-            // Trigger LateUpdate() to handle boundary limits
+            HandleZoom();
         }
+    }
+
+    private void HandleZoom()
+    {
+        Touch touch1 = Input.GetTouch(0);
+        Touch touch2 = Input.GetTouch(1);
+
+        Vector2 touch1PrevPos = touch1.position - touch1.deltaPosition;
+        Vector2 touch2PrevPos = touch2.position - touch2.deltaPosition;
+
+        float prevMagnitude = (touch1PrevPos - touch2PrevPos).magnitude;
+        float currentMagnitude = (touch1.position - touch2.position).magnitude;
+
+        float difference = currentMagnitude - prevMagnitude;
+        Zoom(difference * pencilManager.zoomSpeed);
     }
 
     private bool IsImageZoomed()
@@ -127,8 +118,8 @@ public class FloodFill : MonoBehaviour
     private void Zoom(float increment)
     {
         Vector3 newScale = transform.localScale + Vector3.one * increment;
-        newScale.x = Mathf.Clamp(newScale.x, originalScale.x, originalScale.x * maxZoom);
-        newScale.y = Mathf.Clamp(newScale.y, originalScale.y, originalScale.y * maxZoom);
+        newScale.x = Mathf.Clamp(newScale.x, originalScale.x, originalScale.x * pencilManager.maxZoom);
+        newScale.y = Mathf.Clamp(newScale.y, originalScale.y, originalScale.y * pencilManager.maxZoom);
 
         transform.localScale = newScale;
 
@@ -158,13 +149,8 @@ public class FloodFill : MonoBehaviour
         float halfWidth = cameraSize * cameraAspect;
         float halfHeight = cameraSize;
 
-        float cameraMinX = minX + halfWidth;
-        float cameraMaxX = maxX - halfWidth;
-        float cameraMinY = minY + halfHeight;
-        float cameraMaxY = maxY - halfHeight;
-
-        camPos.x = Mathf.Clamp(camPos.x, cameraMinX, cameraMaxX);
-        camPos.y = Mathf.Clamp(camPos.y, cameraMinY, cameraMaxY);
+        camPos.x = Mathf.Clamp(camPos.x, minX + halfWidth, maxX - halfWidth);
+        camPos.y = Mathf.Clamp(camPos.y, minY + halfHeight, maxY - halfHeight);
         mainCamera.transform.position = camPos;
     }
 
@@ -176,15 +162,10 @@ public class FloodFill : MonoBehaviour
         float spriteWidth = spriteRenderer.bounds.size.x * transform.localScale.x;
         float spriteHeight = spriteRenderer.bounds.size.y * transform.localScale.y;
 
-        minX = (spriteRenderer.bounds.min.x + horzExtent) - spriteWidth / 2f;
-        maxX = (spriteRenderer.bounds.max.x - horzExtent) + spriteWidth / 2f;
-        minY = (spriteRenderer.bounds.min.y + vertExtent) - spriteHeight / 2f;
-        maxY = (spriteRenderer.bounds.max.y - vertExtent) + spriteHeight / 2f;
-    }
-
-    public void SetFillColor(Color newColor)
-    {
-        fillColor = newColor;
+        minX = spriteRenderer.bounds.min.x + horzExtent - spriteWidth / 2f;
+        maxX = spriteRenderer.bounds.max.x - horzExtent + spriteWidth / 2f;
+        minY = spriteRenderer.bounds.min.y + vertExtent - spriteHeight / 2f;
+        maxY = spriteRenderer.bounds.max.y - vertExtent + spriteHeight / 2f;
     }
 
     private void FloodFillArea(Vector2Int startPoint, Color newColor)
@@ -204,11 +185,12 @@ public class FloodFill : MonoBehaviour
 
         Color startColor = texture.GetPixel(startPoint.x, startPoint.y);
 
-        if (!IsSimilarColor(startColor, targetColor) || originalBoundaryPixels.Contains(startPoint))
+        if (!IsSimilarColor(startColor, pencilManager.targetColor) || originalBoundaryPixels.Contains(startPoint))
             return;
 
-        HashSet<Vector2Int> visitedPixels = new HashSet<Vector2Int>();
-        visitedPixels.Add(startPoint);
+        HashSet<Vector2Int> visitedPixels = new HashSet<Vector2Int> { startPoint };
+
+        Vector2Int[] directions = { Vector2Int.right, Vector2Int.left, Vector2Int.up, Vector2Int.down };
 
         while (pixels.Count > 0)
         {
@@ -216,28 +198,24 @@ public class FloodFill : MonoBehaviour
             int x = currentPixel.x;
             int y = currentPixel.y;
 
-            if (x < 0 || x >= width || y < 0 || y >= height)
+            if (x < 0 || x >= width || y < 0 || y >= height || originalBoundaryPixels.Contains(currentPixel))
                 continue;
 
             int index = y * width + x;
             Color currentColor = pixelArray[index];
 
-            if (originalBoundaryPixels.Contains(currentPixel))
+            if (!IsSimilarColor(currentColor, pencilManager.targetColor))
                 continue;
 
-            if (IsSimilarColor(currentColor, targetColor))
-            {
-                pixelArray[index] = newColor;
+            pixelArray[index] = newColor;
 
-                Vector2Int[] directions = { Vector2Int.right, Vector2Int.left, Vector2Int.up, Vector2Int.down };
-                foreach (var dir in directions)
+            foreach (var dir in directions)
+            {
+                Vector2Int neighbor = currentPixel + dir;
+                if (!visitedPixels.Contains(neighbor) && IsPixelValid(neighbor))
                 {
-                    Vector2Int neighbor = currentPixel + dir;
-                    if (!visitedPixels.Contains(neighbor) && IsPixelValid(neighbor))
-                    {
-                        pixels.Enqueue(neighbor);
-                        visitedPixels.Add(neighbor);
-                    }
+                    pixels.Enqueue(neighbor);
+                    visitedPixels.Add(neighbor);
                 }
             }
         }
@@ -248,19 +226,14 @@ public class FloodFill : MonoBehaviour
 
     private bool IsSimilarColor(Color c1, Color c2)
     {
-        return Mathf.Abs(c1.r - c2.r) < colorTolerance &&
-               Mathf.Abs(c1.g - c2.g) < colorTolerance &&
-               Mathf.Abs(c1.b - c2.b) < colorTolerance;
+        float tolerance = pencilManager.colorTolerance;
+        return Mathf.Abs(c1.r - c2.r) < tolerance &&
+               Mathf.Abs(c1.g - c2.g) < tolerance &&
+               Mathf.Abs(c1.b - c2.b) < tolerance;
     }
 
     private Vector2Int WorldToPixel(Vector2 worldPosition)
     {
-        if (spriteRenderer == null)
-        {
-            Debug.LogError("SpriteRenderer component not found.");
-            return Vector2Int.zero;
-        }
-
         Vector3 localPos = transform.InverseTransformPoint(worldPosition);
         float ppu = spriteRenderer.sprite.pixelsPerUnit;
         int x = Mathf.FloorToInt(localPos.x * ppu + texture.width / 2f);
@@ -276,7 +249,7 @@ public class FloodFill : MonoBehaviour
 
     private bool IsPointerOverUI()
     {
-        return UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject();
+        return EventSystem.current.IsPointerOverGameObject();
     }
 
     private void StoreOriginalBoundaryPixels()
@@ -289,7 +262,7 @@ public class FloodFill : MonoBehaviour
             for (int y = 0; y < height; y++)
             {
                 Color pixelColor = texture.GetPixel(x, y);
-                if (IsSimilarColor(pixelColor, boundaryColor))
+                if (IsSimilarColor(pixelColor, pencilManager.boundaryColor))
                 {
                     originalBoundaryPixels.Add(new Vector2Int(x, y));
                 }

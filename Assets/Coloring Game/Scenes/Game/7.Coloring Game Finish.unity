@@ -157,10 +157,10 @@ RectTransform:
   - {fileID: 1334550850}
   m_Father: {fileID: 825516016}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 125, y: -50}
-  m_SizeDelta: {x: 250, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 250, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5844645
 MonoBehaviour:
@@ -346,7 +346,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 8
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -778,13 +778,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   texture: {fileID: 2800000, guid: d646bcd5f3a41d141b3ba43d5ac8cff6, type: 3}
-  fillColor: {r: 1, g: 0, b: 0, a: 1}
-  boundaryColor: {r: 0, g: 0, b: 0, a: 1}
-  targetColor: {r: 1, g: 1, b: 1, a: 1}
-  colorTolerance: 0.55
-  zoomSpeed: 0.1
-  maxZoom: 3
-  dragSpeed: 0.05
 --- !u!212 &136125183
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1359,7 +1352,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1492,7 +1485,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 9
+          m_IntArgument: 6
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1619,7 +1612,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1213634548}
         m_TargetAssemblyTypeName: PencilManager, Assembly-CSharp
-        m_MethodName: MorPencils
+        m_MethodName: OnMorPencilsButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1713,13 +1706,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   texture: {fileID: 2800000, guid: c4db5b3223a24494497bd4087e23ee26, type: 3}
-  fillColor: {r: 1, g: 0, b: 0, a: 1}
-  boundaryColor: {r: 0, g: 0, b: 0, a: 1}
-  targetColor: {r: 1, g: 1, b: 1, a: 1}
-  colorTolerance: 0.55
-  zoomSpeed: 0.1
-  maxZoom: 3
-  dragSpeed: 0.05
 --- !u!212 &296620660
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2231,7 +2217,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1213634548}
         m_TargetAssemblyTypeName: PencilManager, Assembly-CSharp
-        m_MethodName: TuruncuPencils
+        m_MethodName: OnTuruncuPencilsButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2363,7 +2349,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1213634548}
         m_TargetAssemblyTypeName: PencilManager, Assembly-CSharp
-        m_MethodName: SariPencils
+        m_MethodName: OnSariPencilsButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2603,7 +2589,7 @@ GameObject:
   - component: {fileID: 510809550}
   - component: {fileID: 510809549}
   m_Layer: 5
-  m_Name: Tavsan
+  m_Name: Tavsan (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2680,7 +2666,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 7
+          m_IntArgument: 8
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -2794,10 +2780,10 @@ RectTransform:
   - {fileID: 179797355}
   m_Father: {fileID: 825516016}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 375, y: -50}
-  m_SizeDelta: {x: 250, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 250, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &518475974
 MonoBehaviour:
@@ -3114,7 +3100,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1213634548}
         m_TargetAssemblyTypeName: PencilManager, Assembly-CSharp
-        m_MethodName: KMaviPencils
+        m_MethodName: OnMaviPencilsButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3521,7 +3507,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 3
+          m_IntArgument: 9
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -4073,7 +4059,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 6
+          m_IntArgument: 7
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -4214,13 +4200,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   texture: {fileID: 2800000, guid: 45c4987bb0cf656429757b91177eb62f, type: 3}
-  fillColor: {r: 1, g: 0, b: 0, a: 1}
-  boundaryColor: {r: 0, g: 0, b: 0, a: 1}
-  targetColor: {r: 1, g: 1, b: 1, a: 1}
-  colorTolerance: 0.55
-  zoomSpeed: 0.1
-  maxZoom: 3
-  dragSpeed: 0.05
 --- !u!1 &778738987
 GameObject:
   m_ObjectHideFlags: 0
@@ -4472,10 +4451,10 @@ RectTransform:
   - {fileID: 2044911614}
   m_Father: {fileID: 825516016}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 875, y: -50}
-  m_SizeDelta: {x: 250, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 250, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &855963650
 MonoBehaviour:
@@ -4582,7 +4561,7 @@ GameObject:
   - component: {fileID: 868422396}
   - component: {fileID: 868422397}
   m_Layer: 0
-  m_Name: Image Manager
+  m_Name: Main Menu Control
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4617,17 +4596,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pencilUI: {fileID: 512788590}
   menuUI: {fileID: 418566380}
-  characters:
-  - {fileID: 3006894679746650692}
-  - {fileID: 774291133}
-  - {fileID: 296620657}
-  - {fileID: 1155486687}
-  - {fileID: 1939784302}
-  - {fileID: 2108672529}
-  - {fileID: 1596763394}
-  - {fileID: 1515910321}
-  - {fileID: 1633411211}
-  - {fileID: 136125180}
 --- !u!1 &936327998
 GameObject:
   m_ObjectHideFlags: 0
@@ -4718,7 +4686,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
+          m_IntArgument: 4
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -5318,13 +5286,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   texture: {fileID: 2800000, guid: 39e481f031a7ba44ba60fc76b04961fe, type: 3}
-  fillColor: {r: 1, g: 0, b: 0, a: 1}
-  boundaryColor: {r: 0, g: 0, b: 0, a: 1}
-  targetColor: {r: 1, g: 1, b: 1, a: 1}
-  colorTolerance: 0.55
-  zoomSpeed: 0.1
-  maxZoom: 3
-  dragSpeed: 0.05
 --- !u!212 &1155486689
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5438,48 +5399,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pencilContainerPrefab: {fileID: 3671728499925648857, guid: 11d41ac2b1c702e4eb26d6a9393a4864, type: 3}
   pencilContainersParent: {fileID: 1746267678}
-  floodFillObjects:
-  - {fileID: 882617227714187164}
-  - {fileID: 1633411213}
-  - {fileID: 774291136}
-  - {fileID: 1939784304}
-  - {fileID: 296620659}
-  - {fileID: 2108672531}
-  - {fileID: 136125182}
-  - {fileID: 1596763395}
-  - {fileID: 1515910324}
-  - {fileID: 1155486688}
-  colors:
-  - {r: 1, g: 0, b: 0, a: 1}
-  - {r: 1, g: 0, b: 0.4691782, a: 1}
-  - {r: 1, g: 0, b: 0.83949184, a: 1}
-  - {r: 0.76236725, g: 0, b: 1, a: 1}
-  - {r: 0.4014969, g: 0, b: 1, a: 1}
-  - {r: 0.018901825, g: 0, b: 1, a: 1}
-  - {r: 0, g: 0.40872765, b: 1, a: 1}
-  - {r: 0, g: 0.70056295, b: 1, a: 1}
-  - {r: 0, g: 0.93763614, b: 1, a: 1}
-  - {r: 0, g: 1, b: 0.9111047, a: 1}
-  - {r: 0, g: 1, b: 0.66392946, a: 1}
-  - {r: 0, g: 1, b: 0.46179938, a: 1}
-  - {r: 0.09492421, g: 1, b: 0, a: 1}
-  - {r: 0.5507256, g: 1, b: 0, a: 1}
-  - {r: 0.7475207, g: 1, b: 0, a: 1}
-  - {r: 0.88441014, g: 1, b: 0, a: 1}
-  - {r: 1, g: 0.93849885, b: 0, a: 1}
-  - {r: 1, g: 0.7700304, b: 0, a: 1}
-  - {r: 1, g: 0.6202531, b: 0, a: 1}
-  - {r: 1, g: 0.5143481, b: 0, a: 1}
-  - {r: 1, g: 0.3980078, b: 0, a: 1}
-  - {r: 0.6603774, g: 0.4385798, b: 0.27785686, a: 1}
-  - {r: 0.5924529, g: 0.2978915, b: 0.08383759, a: 1}
-  - {r: 0.4792453, g: 0.20849605, b: 0.00994659, a: 1}
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0.24528301, g: 0.24528301, b: 0.24528301, a: 1}
-  - {r: 0.4415095, g: 0.4415095, b: 0.4415095, a: 1}
-  - {r: 0.5924529, g: 0.5924529, b: 0.5924529, a: 1}
-  - {r: 1, g: 1, b: 1, a: 1}
-  - {r: 0.82641506, g: 0.82641506, b: 0.82641506, a: 1}
+  fillColor: {r: 1, g: 0, b: 0, a: 1}
+  boundaryColor: {r: 0, g: 0, b: 0, a: 1}
+  targetColor: {r: 1, g: 1, b: 1, a: 1}
+  colorTolerance: 0.55
+  zoomSpeed: 0.1
+  maxZoom: 3
+  dragSpeed: 0.08
   kirmizi:
   - {r: 0.4792453, g: 0, b: 0, a: 1}
   - {r: 0.5924529, g: 0, b: 0, a: 1}
@@ -5535,15 +5461,18 @@ MonoBehaviour:
   - {r: 0.48113203, g: 1, b: 0.48316678, a: 1}
   - {r: 0.6999999, g: 1, b: 0.6999999, a: 1}
   kMavi:
-  - {r: 0, g: 0.3161419, b: 0.3660378, a: 1}
-  - {r: 0.006429308, g: 0.4248101, b: 0.4867924, a: 1}
-  - {r: 0.012139537, g: 0.5097889, b: 0.5849056, a: 1}
-  - {r: 0.25702384, g: 0.654816, b: 0.7132075, a: 1}
-  - {r: 0, g: 0.6138279, b: 0.7056604, a: 1}
-  - {r: 0, g: 0.71423453, b: 0.81886786, a: 1}
-  - {r: 0, g: 0.87081337, b: 1, a: 1}
-  - {r: 0.25471687, g: 0.90355164, b: 1, a: 1}
-  - {r: 0.5113207, g: 0.9357001, b: 1, a: 1}
+  - {r: 0.007690995, g: 0, b: 0.23773581, a: 1}
+  - {r: 0.011753776, g: 0, b: 0.3584906, a: 1}
+  - {r: 0.017789787, g: 0, b: 0.5396226, a: 1}
+  - {r: 0.025020584, g: 0, b: 0.690566, a: 1}
+  - {r: 0.03317547, g: 0, b: 1, a: 1}
+  - {r: 0.12773019, g: 0.116589524, b: 0.4716981, a: 1}
+  - {r: 0.1629806, g: 0.14739048, b: 0.6150943, a: 1}
+  - {r: 0.21312237, g: 0.1917906, b: 0.82641506, a: 1}
+  - {r: 0.2158969, g: 0.19140615, b: 0.98490566, a: 1}
+  - {r: 0.40134507, g: 0.3830188, b: 1, a: 1}
+  - {r: 0.31772864, g: 0.5445916, b: 0.9622642, a: 1}
+  - {r: 0.5823637, g: 0.7303772, b: 0.9924528, a: 1}
   mor:
   - {r: 0.25407326, g: 0, b: 0.3660378, a: 1}
   - {r: 0.3296814, g: 0, b: 0.4716981, a: 1}
@@ -5556,16 +5485,18 @@ MonoBehaviour:
   - {r: 0.8633373, g: 0.5956354, b: 0.97735846, a: 1}
   - {r: 0.91463566, g: 0.73216796, b: 0.9924528, a: 1}
   mavi:
-  - {r: 0, g: 0.026415149, b: 0.3207547, a: 1}
-  - {r: 0, g: 0.044132493, b: 0.5169811, a: 1}
-  - {r: 0.22142398, g: 0.24146178, b: 0.5169811, a: 1}
-  - {r: 0, g: 0.05628925, b: 0.6754716, a: 1}
-  - {r: 0, g: 0.065423265, b: 0.8037735, a: 1}
-  - {r: 0, g: 0.08292675, b: 1, a: 1}
-  - {r: 0.2245282, g: 0.28839073, b: 1, a: 1}
-  - {r: 0.36037737, g: 0.41529432, b: 1, a: 1}
-  - {r: 0.5943396, g: 0.62918156, b: 1, a: 1}
-  - {r: 0.76792455, g: 0.7859498, b: 1, a: 1}
+  - {r: 0, g: 0.31816295, b: 0.3886792, a: 1}
+  - {r: 0, g: 0.28128847, b: 0.4641509, a: 1}
+  - {r: 0, g: 0.42136225, b: 0.690566, a: 1}
+  - {r: 0.007725138, g: 0.47996354, b: 0.5849056, a: 1}
+  - {r: 0, g: 0.6079545, b: 1, a: 1}
+  - {r: 0, g: 0.63149756, b: 0.7735849, a: 1}
+  - {r: 0, g: 0.81725883, b: 1, a: 1}
+  - {r: 0.25471687, g: 0.86263406, b: 1, a: 1}
+  - {r: 0.4433962, g: 0.89746773, b: 1, a: 1}
+  - {r: 0.2396226, g: 0.9709103, b: 1, a: 1}
+  - {r: 0.51886785, g: 0.98263955, b: 1, a: 1}
+  - {r: 0.68490565, g: 0.98975307, b: 1, a: 1}
   gri:
   - {r: 0, g: 0, b: 0, a: 1}
   - {r: 0.13962269, g: 0.13962269, b: 0.13962269, a: 1}
@@ -5735,7 +5666,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1213634548}
         m_TargetAssemblyTypeName: PencilManager, Assembly-CSharp
-        m_MethodName: YesilPencils
+        m_MethodName: OnYesilPencilsButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6001,7 +5932,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1213634548}
         m_TargetAssemblyTypeName: PencilManager, Assembly-CSharp
-        m_MethodName: GriPencils
+        m_MethodName: OnGriPencilsButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6347,7 +6278,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1213634548}
         m_TargetAssemblyTypeName: PencilManager, Assembly-CSharp
-        m_MethodName: KirmiziPencils
+        m_MethodName: OnKirmiziPencilsButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6424,6 +6355,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1950696767}
   - {fileID: 1213634547}
   - {fileID: 868422396}
   - {fileID: 2056981991}
@@ -6544,7 +6476,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1213634548}
         m_TargetAssemblyTypeName: PencilManager, Assembly-CSharp
-        m_MethodName: MaviPencils
+        m_MethodName: OnKMaviPencilsButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6690,13 +6622,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   texture: {fileID: 2800000, guid: 63e6f769ad1d0cb4d986eeb9ab1e43b3, type: 3}
-  fillColor: {r: 1, g: 0, b: 0, a: 1}
-  boundaryColor: {r: 0, g: 0, b: 0, a: 1}
-  targetColor: {r: 1, g: 1, b: 1, a: 1}
-  colorTolerance: 0.55
-  zoomSpeed: 0.1
-  maxZoom: 3
-  dragSpeed: 0.05
 --- !u!1 &1522630550
 GameObject:
   m_ObjectHideFlags: 0
@@ -7265,13 +7190,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   texture: {fileID: 2800000, guid: 4c9fcae41034b6646b9884388d4b1559, type: 3}
-  fillColor: {r: 1, g: 0, b: 0, a: 1}
-  boundaryColor: {r: 0, g: 0, b: 0, a: 1}
-  targetColor: {r: 1, g: 1, b: 1, a: 1}
-  colorTolerance: 0.55
-  zoomSpeed: 0.1
-  maxZoom: 3
-  dragSpeed: 0.05
 --- !u!212 &1596763396
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7385,13 +7303,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   texture: {fileID: 2800000, guid: 57363a45c9de93844987f90377aadd96, type: 3}
-  fillColor: {r: 1, g: 0, b: 0, a: 1}
-  boundaryColor: {r: 0, g: 0, b: 0, a: 1}
-  targetColor: {r: 1, g: 1, b: 1, a: 1}
-  colorTolerance: 0.55
-  zoomSpeed: 0.1
-  maxZoom: 3
-  dragSpeed: 0.05
 --- !u!212 &1633411214
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7478,10 +7389,10 @@ RectTransform:
   - {fileID: 1522630551}
   m_Father: {fileID: 825516016}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 625, y: -50}
-  m_SizeDelta: {x: 250, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 250, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1699044106
 MonoBehaviour:
@@ -7871,7 +7782,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1213634548}
         m_TargetAssemblyTypeName: PencilManager, Assembly-CSharp
-        m_MethodName: AllPencils
+        m_MethodName: OnAllPencilsButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8115,13 +8026,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   texture: {fileID: 2800000, guid: e64df711095563943b40a87f7b5fe733, type: 3}
-  fillColor: {r: 1, g: 0, b: 0, a: 1}
-  boundaryColor: {r: 0, g: 0, b: 0, a: 1}
-  targetColor: {r: 1, g: 1, b: 1, a: 1}
-  colorTolerance: 0.55
-  zoomSpeed: 0.1
-  maxZoom: 3
-  dragSpeed: 0.05
 --- !u!212 &1939784305
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8174,6 +8078,61 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1950696766
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1950696767}
+  - component: {fileID: 1950696768}
+  m_Layer: 0
+  m_Name: Character Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1950696767
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1950696766}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1416504520}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1950696768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1950696766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33ce25b35757d874c8c1eb0649752917, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characters:
+  - {fileID: 3006894679746650692}
+  - {fileID: 1633411211}
+  - {fileID: 774291133}
+  - {fileID: 1939784302}
+  - {fileID: 296620657}
+  - {fileID: 2108672529}
+  - {fileID: 136125180}
+  - {fileID: 1596763394}
+  - {fileID: 1515910321}
+  - {fileID: 1155486687}
 --- !u!1 &1953919678
 GameObject:
   m_ObjectHideFlags: 0
@@ -8290,7 +8249,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1213634548}
         m_TargetAssemblyTypeName: PencilManager, Assembly-CSharp
-        m_MethodName: PembePencils
+        m_MethodName: OnPembePencilsButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8428,7 +8387,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 4
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -8505,10 +8464,10 @@ RectTransform:
   - {fileID: 1577510220}
   m_Father: {fileID: 825516016}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1125, y: -50}
-  m_SizeDelta: {x: 250, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 250, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2006516820
 MonoBehaviour:
@@ -8782,12 +8741,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a5991c58232cef4fa1020b467996bb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allImages:
-  - {fileID: 509024386}
-  - {fileID: 781642402}
-  - {fileID: 560909912}
-  - {fileID: 1145833422}
-  - {fileID: 952914345}
   hayvanlarImages:
   - {fileID: 509024386}
   - {fileID: 781642402}
@@ -8843,13 +8796,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   texture: {fileID: 2800000, guid: 99d41e94e9126174aba470e323d35188, type: 3}
-  fillColor: {r: 1, g: 0, b: 0, a: 1}
-  boundaryColor: {r: 0, g: 0, b: 0, a: 1}
-  targetColor: {r: 1, g: 1, b: 1, a: 1}
-  colorTolerance: 0.55
-  zoomSpeed: 0.1
-  maxZoom: 3
-  dragSpeed: 0.05
 --- !u!212 &2108672532
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -9047,13 +8993,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   texture: {fileID: 2800000, guid: 94c169a92068810418445b1a5e875287, type: 3}
-  fillColor: {r: 1, g: 0, b: 0, a: 1}
-  boundaryColor: {r: 0, g: 0, b: 0, a: 1}
-  targetColor: {r: 1, g: 1, b: 1, a: 1}
-  colorTolerance: 0.55
-  zoomSpeed: 0.1
-  maxZoom: 3
-  dragSpeed: 0.05
 --- !u!4 &1919759416727802509
 Transform:
   m_ObjectHideFlags: 0

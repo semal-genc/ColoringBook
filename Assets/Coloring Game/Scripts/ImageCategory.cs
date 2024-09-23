@@ -13,7 +13,6 @@ public class ImageCategory : MonoBehaviour
         Diger
     }
 
-    [SerializeField] private Image[] allImages;
     [SerializeField] private Image[] hayvanlarImages;
     [SerializeField] private Image[] dogaImages;
     [SerializeField] private Image[] hayatImages;
@@ -26,7 +25,6 @@ public class ImageCategory : MonoBehaviour
         // Dictionary'yi baþlat
         categoryImages = new Dictionary<Category, Image[]>
         {
-            { Category.All, allImages },
             { Category.Hayvanlar, hayvanlarImages },
             { Category.Doga, dogaImages },
             { Category.Hayat, hayatImages },
@@ -48,7 +46,18 @@ public class ImageCategory : MonoBehaviour
     public void ShowImages(Category category)
     {
         DeactivateAllImages();
-        if (categoryImages.TryGetValue(category, out var images))
+        if (category == Category.All)
+        {
+            // Bütün kategorilerdeki resimleri aktif hale getir
+            foreach (var categoryImagesList in categoryImages.Values)
+            {
+                foreach (var img in categoryImagesList)
+                {
+                    img.gameObject.SetActive(true);
+                }
+            }
+        }
+        else if (categoryImages.TryGetValue(category, out var images))
         {
             foreach (var img in images)
             {
@@ -82,5 +91,4 @@ public class ImageCategory : MonoBehaviour
     {
         ShowImages(Category.Diger);
     }
-
 }

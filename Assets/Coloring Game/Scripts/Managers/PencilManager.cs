@@ -6,11 +6,21 @@ public class PencilManager : MonoBehaviour
     [Header("Elements")]
     [SerializeField] private PencilContainer pencilContainerPrefab;
     [SerializeField] private Transform pencilContainersParent;
-    [SerializeField] private List<FloodFill> floodFillObjects; // Birden fazla FloodFill objesi
+    private CharacterManager characterManager;
     private FloodFill activeFloodFill;
 
-    [Header("Settings")]
-    [SerializeField] private Color[] colors;
+    [Header("Flood Fill Color Settings")]
+    public Color fillColor = Color.red;
+    public Color boundaryColor = Color.black;
+    public Color targetColor = Color.white;
+    public float colorTolerance = 0.55f;
+
+    [Header("Flood Fill Zoom Settings")]
+    public float zoomSpeed = 0.1f;
+    public float maxZoom = 3.0f;
+    public float dragSpeed = 0.05f;
+
+    [Header("Color Settings")]
     [SerializeField] private Color[] kirmizi;
     [SerializeField] private Color[] pembe;
     [SerializeField] private Color[] sari;
@@ -21,96 +31,75 @@ public class PencilManager : MonoBehaviour
     [SerializeField] private Color[] mavi;
     [SerializeField] private Color[] gri;
 
+    private Dictionary<ColorCategory, Color[]> colorCategoryMap;
     private List<PencilContainer> createdPencilContainers = new List<PencilContainer>();
     private List<PencilContainer> activePencilContainers = new List<PencilContainer>();
     private PencilContainer previousPencilContainer;
 
-    void Start()
+    public enum ColorCategory
     {
+        All,
+        Kirmizi,
+        Pembe,
+        Sari,
+        Turuncu,
+        Yesil,
+        Mavi,
+        Mor,
+        KMavi,
+        Gri
+    }
+
+    private void Start()
+    {
+        characterManager = FindObjectOfType<CharacterManager>();
+        InitializeColorCategories();
         SetActiveFloodFill(); // Baþlangýçta aktif FloodFill'i bulalým
-        ShowPencils(colors);
+        ShowPencils(ColorCategory.All); // Tüm renkleri göster
     }
 
-    public void AllPencils()
+    private void InitializeColorCategories()
     {
-        ShowPencils(colors);
-    }
-
-    public void KirmiziPencils()
-    {
-        ShowPencils(kirmizi);
-    }
-
-    public void PembePencils()
-    {
-        ShowPencils(pembe);
-    }
-
-    public void SariPencils()
-    {
-        ShowPencils(sari);
-    }
-
-    public void TuruncuPencils()
-    {
-        ShowPencils(turuncu);
-    }
-
-    public void YesilPencils()
-    {
-        ShowPencils(yesil);
-    }
-
-    public void KMaviPencils()
-    {
-        ShowPencils(kMavi);
-    }
-
-    public void MorPencils()
-    {
-        ShowPencils(mor);
-    }
-
-    public void MaviPencils()
-    {
-        ShowPencils(mavi);
-    }
-
-    public void GriPencils()
-    {
-        ShowPencils(gri);
-    }
-
-    private void Update()
-    {
-        if (activeFloodFill == null || !activeFloodFill.gameObject.activeInHierarchy)
+        // Diðer renk kategorilerini tanýmla
+        colorCategoryMap = new Dictionary<ColorCategory, Color[]>
         {
-            SetActiveFloodFill();
+            { ColorCategory.Kirmizi, kirmizi },
+            { ColorCategory.Pembe, pembe },
+            { ColorCategory.Sari, sari },
+            { ColorCategory.Turuncu, turuncu },
+            { ColorCategory.Yesil, yesil },
+            { ColorCategory.Mavi, mavi },
+            { ColorCategory.Mor, mor },
+            { ColorCategory.KMavi, kMavi },
+            { ColorCategory.Gri, gri }
+        };
+
+        // Tüm renk kategorilerini birleþtir ve allColors kategorisine ata
+        var allColorsList = new List<Color>();
+        foreach (var colorArray in colorCategoryMap.Values)
+        {
+            allColorsList.AddRange(colorArray); // Her renk kategorisini birleþtir
+        }
+        colorCategoryMap[ColorCategory.All] = allColorsList.ToArray(); // allColors kategorisini dinamik olarak oluþtur
+    }
+
+    public void ShowPencils(ColorCategory category)
+    {
+        if (colorCategoryMap.TryGetValue(category, out var colorsToShow))
+        {
+            DisplayPencils(colorsToShow);
         }
     }
 
-    private void SetActiveFloodFill()
-    {
-        foreach (var floodFill in floodFillObjects)
-        {
-            if (floodFill.gameObject.activeInHierarchy)
-            {
-                activeFloodFill = floodFill;
-                return; // Ýlk aktif objeyi bulduðumuzda döngüden çýkarýz
-            }
-        }
-
-        activeFloodFill = null; // Aktif FloodFill bulunamadýysa sýfýrla
-    }
-
-    private void ShowPencils(Color[] colorsToShow)
+    private void DisplayPencils(Color[] colorsToShow)
     {
         HideAllPencils();
-
         activePencilContainers.Clear();
+
         foreach (Color color in colorsToShow)
         {
             PencilContainer pencilContainer = CreatePencil(color);
+            pencilContainer.gameObject.SetActive(true);
             activePencilContainers.Add(pencilContainer);
         }
 
@@ -136,6 +125,38 @@ public class PencilManager : MonoBehaviour
         return pencilContainerInstance;
     }
 
+    private void Update()
+    {
+        if (activeFloodFill == null || !activeFloodFill.gameObject.activeInHierarchy)
+        {
+            SetActiveFloodFill();
+        }
+    }
+
+    private void SetActiveFloodFill()
+    {
+        if (characterManager == null || characterManager.characters == null)
+        {
+            Debug.LogError("CharacterManager veya characters listesi boþ!");
+            return;
+        }
+
+        // Aktif olan ilk FloodFill objesini bul
+        foreach (var character in characterManager.characters)
+        {
+            if (character.gameObject.activeInHierarchy)
+            {
+                activeFloodFill = character.GetComponent<FloodFill>(); // FloodFill component'ini al
+                if (activeFloodFill != null)
+                {
+                    return; // Ýlk aktif objeyi bulduðumuzda döngüden çýkarýz
+                }
+            }
+        }
+
+        activeFloodFill = null; // Aktif FloodFill bulunamadýysa sýfýrla
+    }
+
     public void PencilContainerClickedCallback(PencilContainer pencilContainer)
     {
         if (previousPencilContainer != null && previousPencilContainer == pencilContainer)
@@ -154,7 +175,20 @@ public class PencilManager : MonoBehaviour
 
         if (activeFloodFill != null)
         {
-            activeFloodFill.SetFillColor(pencilContainer.GetColor());
+            Color selectedColor = pencilContainer.GetColor();
+            fillColor = selectedColor; // Seçilen rengi fillColor olarak ayarla
         }
     }
+
+    // Bu metodlarý butonlara baðlayarak renklere göre kalemleri gösterebilirsiniz
+    public void OnAllPencilsButton() => ShowPencils(ColorCategory.All);
+    public void OnKirmiziPencilsButton() => ShowPencils(ColorCategory.Kirmizi);
+    public void OnPembePencilsButton() => ShowPencils(ColorCategory.Pembe);
+    public void OnSariPencilsButton() => ShowPencils(ColorCategory.Sari);
+    public void OnTuruncuPencilsButton() => ShowPencils(ColorCategory.Turuncu);
+    public void OnYesilPencilsButton() => ShowPencils(ColorCategory.Yesil);
+    public void OnMaviPencilsButton() => ShowPencils(ColorCategory.Mavi);
+    public void OnMorPencilsButton() => ShowPencils(ColorCategory.Mor);
+    public void OnKMaviPencilsButton() => ShowPencils(ColorCategory.KMavi);
+    public void OnGriPencilsButton() => ShowPencils(ColorCategory.Gri);
 }
