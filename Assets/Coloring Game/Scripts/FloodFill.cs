@@ -13,11 +13,8 @@ public class FloodFill : MonoBehaviour
     private Vector3 originalScale;
     private Vector3 originalPosition;
     private Vector3 touchStart;
-    private Vector3 previousCameraPosition;
-
-    private bool isDragging = false;
     private Camera mainCamera;
-    private float minX, maxX, minY, maxY;
+    private bool isDragging = false;
 
     private PencilManager pencilManager;
 
@@ -36,32 +33,19 @@ public class FloodFill : MonoBehaviour
         originalPosition = transform.position;
         mainCamera = Camera.main;
         CalculateBounds();
-        previousCameraPosition = mainCamera.transform.position;
-    }
-
-    public void UpdateTargetColor(Vector2Int pixelPosition)
-    {
-        if (IsPixelValid(pixelPosition))
-        {
-            pencilManager.targetColor = texture.GetPixel(pixelPosition.x, pixelPosition.y);
-        }
     }
 
     private void Update()
     {
         HandleTouchInput();
 
-        if (spriteRenderer == null)
-            return;
-
-        // Tek dokunmada boyama yap
         if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Ended && !isDragging)
         {
             // UI üzerinde olup olmadýðýmýzý kontrol edelim
             if (IsPointerOverUI()) return;
 
             Vector2 touchPosition = Input.GetTouch(0).position;
-            Vector2 worldPosition = Camera.main.ScreenToWorldPoint(touchPosition);
+            Vector2 worldPosition = mainCamera.ScreenToWorldPoint(touchPosition);
             Vector2Int pixelPosition = WorldToPixel(worldPosition);
 
             UpdateTargetColor(pixelPosition);
@@ -81,7 +65,6 @@ public class FloodFill : MonoBehaviour
                 isDragging = false;
             }
 
-            // Eðer dokunma hareket ettiriliyorsa sürükleme moduna geçiyoruz
             if (touch.phase == TouchPhase.Moved && IsImageZoomed())
             {
                 Vector3 direction = touchStart - mainCamera.ScreenToWorldPoint(touch.position);
@@ -97,16 +80,14 @@ public class FloodFill : MonoBehaviour
 
     private void HandleZoom()
     {
+        // Ýki parmakla yakýnlaþtýrma iþlemi
         Touch touch1 = Input.GetTouch(0);
         Touch touch2 = Input.GetTouch(1);
 
-        Vector2 touch1PrevPos = touch1.position - touch1.deltaPosition;
-        Vector2 touch2PrevPos = touch2.position - touch2.deltaPosition;
-
-        float prevMagnitude = (touch1PrevPos - touch2PrevPos).magnitude;
+        float prevMagnitude = (touch1.position - touch1.deltaPosition - (touch2.position - touch2.deltaPosition)).magnitude;
         float currentMagnitude = (touch1.position - touch2.position).magnitude;
-
         float difference = currentMagnitude - prevMagnitude;
+
         Zoom(difference * pencilManager.zoomSpeed);
     }
 
@@ -140,32 +121,19 @@ public class FloodFill : MonoBehaviour
         mainCamera.transform.position = new Vector3(0, 0, -10);
     }
 
-    private void LimitCameraToBounds()
-    {
-        Vector3 camPos = mainCamera.transform.position;
-        float cameraSize = mainCamera.orthographicSize;
-        float cameraAspect = Screen.width / (float)Screen.height;
-
-        float halfWidth = cameraSize * cameraAspect;
-        float halfHeight = cameraSize;
-
-        camPos.x = Mathf.Clamp(camPos.x, minX + halfWidth, maxX - halfWidth);
-        camPos.y = Mathf.Clamp(camPos.y, minY + halfHeight, maxY - halfHeight);
-        mainCamera.transform.position = camPos;
-    }
-
     private void CalculateBounds()
     {
+        // Görüntü sýnýrlarýný hesaplar
         float vertExtent = mainCamera.orthographicSize;
         float horzExtent = vertExtent * Screen.width / Screen.height;
 
         float spriteWidth = spriteRenderer.bounds.size.x * transform.localScale.x;
         float spriteHeight = spriteRenderer.bounds.size.y * transform.localScale.y;
 
-        minX = spriteRenderer.bounds.min.x + horzExtent - spriteWidth / 2f;
-        maxX = spriteRenderer.bounds.max.x - horzExtent + spriteWidth / 2f;
-        minY = spriteRenderer.bounds.min.y + vertExtent - spriteHeight / 2f;
-        maxY = spriteRenderer.bounds.max.y - vertExtent + spriteHeight / 2f;
+        float minX = spriteRenderer.bounds.min.x + horzExtent - spriteWidth / 2f;
+        float maxX = spriteRenderer.bounds.max.x - horzExtent + spriteWidth / 2f;
+        float minY = spriteRenderer.bounds.min.y + vertExtent - spriteHeight / 2f;
+        float maxY = spriteRenderer.bounds.max.y - vertExtent + spriteHeight / 2f;
     }
 
     private void FloodFillArea(Vector2Int startPoint, Color newColor)
@@ -178,15 +146,17 @@ public class FloodFill : MonoBehaviour
 
         int width = texture.width;
         int height = texture.height;
-
         Color[] pixelArray = texture.GetPixels();
         Queue<Vector2Int> pixels = new Queue<Vector2Int>();
         pixels.Enqueue(startPoint);
 
         Color startColor = texture.GetPixel(startPoint.x, startPoint.y);
 
-        if (!IsSimilarColor(startColor, pencilManager.targetColor) || originalBoundaryPixels.Contains(startPoint))
+        if (IsSimilarColor(startColor, newColor, pencilManager.colorToleranceForFloodFill) || originalBoundaryPixels.Contains(startPoint))
+        {
+            Debug.Log($"Flood fill canceled: Start color {startColor} is similar to new color {newColor}.");
             return;
+        }
 
         HashSet<Vector2Int> visitedPixels = new HashSet<Vector2Int> { startPoint };
 
@@ -204,8 +174,17 @@ public class FloodFill : MonoBehaviour
             int index = y * width + x;
             Color currentColor = pixelArray[index];
 
-            if (!IsSimilarColor(currentColor, pencilManager.targetColor))
+            if (!IsSimilarColor(currentColor, pencilManager.targetColor, pencilManager.colorTolerance))
+            {
+                Debug.Log($"Flood fill canceled: Current pixel color {currentColor} is not similar to target color {pencilManager.targetColor}.");
                 continue;
+            }
+
+            if (IsSimilarColor(currentColor, newColor, pencilManager.colorToleranceForFloodFill))
+            {
+                Debug.Log($"Flood fill canceled: Current pixel color {currentColor} is similar to new color {newColor}.");
+                continue;
+            }
 
             pixelArray[index] = newColor;
 
@@ -224,9 +203,8 @@ public class FloodFill : MonoBehaviour
         texture.Apply();
     }
 
-    private bool IsSimilarColor(Color c1, Color c2)
+    private bool IsSimilarColor(Color c1, Color c2, float tolerance)
     {
-        float tolerance = pencilManager.colorTolerance;
         return Mathf.Abs(c1.r - c2.r) < tolerance &&
                Mathf.Abs(c1.g - c2.g) < tolerance &&
                Mathf.Abs(c1.b - c2.b) < tolerance;
@@ -262,11 +240,19 @@ public class FloodFill : MonoBehaviour
             for (int y = 0; y < height; y++)
             {
                 Color pixelColor = texture.GetPixel(x, y);
-                if (IsSimilarColor(pixelColor, pencilManager.boundaryColor))
+                if (IsSimilarColor(pixelColor, pencilManager.boundaryColor, pencilManager.colorToleranceForFloodFill))
                 {
                     originalBoundaryPixels.Add(new Vector2Int(x, y));
                 }
             }
+        }
+    }
+
+    public void UpdateTargetColor(Vector2Int pixelPosition)
+    {
+        if (IsPixelValid(pixelPosition))
+        {
+            pencilManager.targetColor = texture.GetPixel(pixelPosition.x, pixelPosition.y);
         }
     }
 }

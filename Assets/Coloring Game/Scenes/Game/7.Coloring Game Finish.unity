@@ -5402,6 +5402,7 @@ MonoBehaviour:
   fillColor: {r: 1, g: 0, b: 0, a: 1}
   boundaryColor: {r: 0, g: 0, b: 0, a: 1}
   targetColor: {r: 1, g: 1, b: 1, a: 1}
+  colorToleranceForFloodFill: 0.01
   colorTolerance: 0.55
   zoomSpeed: 0.1
   maxZoom: 3

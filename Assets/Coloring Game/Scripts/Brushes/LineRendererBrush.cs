@@ -23,15 +23,21 @@ public class LineRendererBrush : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.touchCount > 0) 
         {
-            CreateLine();
-        }
-        else if (Input.GetMouseButton(0))
-        {
-            PaintOnCanvas();
+            Touch touch = Input.GetTouch(0);
+
+            if (touch.phase == TouchPhase.Began) 
+            {
+                CreateLine(); 
+            }
+            else if (touch.phase == TouchPhase.Moved) 
+            {
+                PaintOnCanvas(); 
+            }
         }
     }
+
 
     void CreateLine()
     {

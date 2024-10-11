@@ -13,6 +13,7 @@ public class PencilManager : MonoBehaviour
     public Color fillColor = Color.red;
     public Color boundaryColor = Color.black;
     public Color targetColor = Color.white;
+    public float colorToleranceForFloodFill = 0.01f;
     public float colorTolerance = 0.55f;
 
     [Header("Flood Fill Zoom Settings")]

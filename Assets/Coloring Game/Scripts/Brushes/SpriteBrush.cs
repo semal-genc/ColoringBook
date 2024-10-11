@@ -21,15 +21,21 @@ public class SpriteBrush : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.touchCount > 0)
         {
-            RaycastSprites();
-        }
-        else if (Input.GetMouseButton(0))
-        {
-            RaycastCurrentSprite();
+            Touch touch = Input.GetTouch(0); 
+
+            if (touch.phase == TouchPhase.Began) 
+            {
+                RaycastSprites(); 
+            }
+            else if (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary)
+            {
+                RaycastCurrentSprite(); 
+            }
         }
     }
+
 
     void RaycastSprites()
     {

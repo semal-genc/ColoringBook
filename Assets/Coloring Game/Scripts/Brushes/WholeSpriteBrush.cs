@@ -15,11 +15,17 @@ public class WholeSpriteBrush : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.touchCount > 0)
         {
-            RaycastSprites();
+            Touch touch = Input.GetTouch(0);
+
+            if (touch.phase == TouchPhase.Began || touch.phase == TouchPhase.Moved)
+            {
+                RaycastSprites();
+            }
         }
     }
+
 
     public void SetColor(Color newColor)
     {

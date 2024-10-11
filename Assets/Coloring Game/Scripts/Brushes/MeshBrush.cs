@@ -27,15 +27,21 @@ public class MeshBrush : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.touchCount > 0) 
         {
-            CreateMesh();
-        }
-        else if (Input.GetMouseButton(0))
-        {
-            Paint();
+            Touch touch = Input.GetTouch(0);
+
+            if (touch.phase == TouchPhase.Began) 
+            {
+                CreateMesh();
+            }
+            else if (touch.phase == TouchPhase.Moved)
+            {
+                Paint();
+            }
         }
     }
+
 
     void CreateMesh()
     {
