@@ -152,14 +152,14 @@ public class FloodFill : MonoBehaviour
 
         Color startColor = texture.GetPixel(startPoint.x, startPoint.y);
 
+        // Baþlangýç rengi sýnýr veya yeni renkle benzerse iþlemi durdur
         if (IsSimilarColor(startColor, newColor, pencilManager.colorToleranceForFloodFill) || originalBoundaryPixels.Contains(startPoint))
         {
-            Debug.Log($"Flood fill canceled: Start color {startColor} is similar to new color {newColor}.");
+            Debug.Log($"Flood fill canceled: Start color {startColor} is similar to new color {newColor} or it's a boundary pixel.");
             return;
         }
 
         HashSet<Vector2Int> visitedPixels = new HashSet<Vector2Int> { startPoint };
-
         Vector2Int[] directions = { Vector2Int.right, Vector2Int.left, Vector2Int.up, Vector2Int.down };
 
         while (pixels.Count > 0)
@@ -168,26 +168,23 @@ public class FloodFill : MonoBehaviour
             int x = currentPixel.x;
             int y = currentPixel.y;
 
+            // Piksel sýnýrlarýn dýþýnda mý veya sýnýr piksel mi? Eðer öyleyse boyama
             if (x < 0 || x >= width || y < 0 || y >= height || originalBoundaryPixels.Contains(currentPixel))
                 continue;
 
             int index = y * width + x;
             Color currentColor = pixelArray[index];
 
-            if (!IsSimilarColor(currentColor, pencilManager.targetColor, pencilManager.colorTolerance))
+            // Eðer piksel sýnýr rengine çok yakýnsa veya hemen yanýndaysa, asla boyama
+            if (IsSimilarColor(currentColor, pencilManager.boundaryColor, pencilManager.colorTolerance) || IsNearBoundaryPixel(currentPixel))
             {
-                Debug.Log($"Flood fill canceled: Current pixel color {currentColor} is not similar to target color {pencilManager.targetColor}.");
-                continue;
+                continue; // Sýnýrýn yanýnda olan pikselleri koruma
             }
 
-            if (IsSimilarColor(currentColor, newColor, pencilManager.colorToleranceForFloodFill))
-            {
-                Debug.Log($"Flood fill canceled: Current pixel color {currentColor} is similar to new color {newColor}.");
-                continue;
-            }
-
+            // Yeni rengi uygula
             pixelArray[index] = newColor;
 
+            // Komþu pikselleri sýraya ekle
             foreach (var dir in directions)
             {
                 Vector2Int neighbor = currentPixel + dir;
@@ -203,12 +200,50 @@ public class FloodFill : MonoBehaviour
         texture.Apply();
     }
 
+    private bool IsNearBoundaryPixel(Vector2Int pixel)
+    {
+        Vector2Int[] directions = {
+        Vector2Int.right,  // Sað
+        Vector2Int.left,   // Sol
+        Vector2Int.up,     // Üst
+        Vector2Int.down    // Alt
+    };
+
+        // Komþu pikselleri kontrol et
+        foreach (var dir in directions)
+        {
+            Vector2Int neighbor = pixel + dir; // Komþu pikseli kontrol et
+
+            if (originalBoundaryPixels.Contains(neighbor))
+            {
+                return true; // Eðer komþu piksel sýnýr piksellerindense, boyama
+            }
+        }
+
+        return false; // Hiçbir komþu piksel sýnýr deðilse, false döndür
+    }
+
     private bool IsSimilarColor(Color c1, Color c2, float tolerance)
     {
-        return Mathf.Abs(c1.r - c2.r) < tolerance &&
-               Mathf.Abs(c1.g - c2.g) < tolerance &&
-               Mathf.Abs(c1.b - c2.b) < tolerance;
+        // RGB karþýlaþtýrmasý
+        bool rgbCloseEnough = Mathf.Abs(c1.r - c2.r) < tolerance &&
+                              Mathf.Abs(c1.g - c2.g) < tolerance &&
+                              Mathf.Abs(c1.b - c2.b) < tolerance;
+
+        // Parlaklýk (Brightness) karþýlaþtýrmasý
+        float brightness1 = (c1.r + c1.g + c1.b) / 3f;
+        float brightness2 = (c2.r + c2.g + c2.b) / 3f;
+        bool brightnessCloseEnough = Mathf.Abs(brightness1 - brightness2) < tolerance;
+
+        // Doygunluk (Saturation) karþýlaþtýrmasý
+        float saturation1 = Mathf.Max(c1.r, c1.g, c1.b) - Mathf.Min(c1.r, c1.g, c1.b);
+        float saturation2 = Mathf.Max(c2.r, c2.g, c2.b) - Mathf.Min(c2.r, c2.g, c2.b);
+        bool saturationCloseEnough = Mathf.Abs(saturation1 - saturation2) < tolerance;
+
+        // RGB, parlaklýk ve doygunluða dayalý bir karþýlaþtýrma
+        return rgbCloseEnough && brightnessCloseEnough && saturationCloseEnough;
     }
+
 
     private Vector2Int WorldToPixel(Vector2 worldPosition)
     {

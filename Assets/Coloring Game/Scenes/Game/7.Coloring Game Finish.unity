@@ -5403,7 +5403,7 @@ MonoBehaviour:
   boundaryColor: {r: 0, g: 0, b: 0, a: 1}
   targetColor: {r: 1, g: 1, b: 1, a: 1}
   colorToleranceForFloodFill: 0.01
-  colorTolerance: 0.55
+  colorTolerance: 0.1
   zoomSpeed: 0.1
   maxZoom: 3
   dragSpeed: 0.08
@@ -5499,7 +5499,6 @@ MonoBehaviour:
   - {r: 0.51886785, g: 0.98263955, b: 1, a: 1}
   - {r: 0.68490565, g: 0.98975307, b: 1, a: 1}
   gri:
-  - {r: 0, g: 0, b: 0, a: 1}
   - {r: 0.13962269, g: 0.13962269, b: 0.13962269, a: 1}
   - {r: 0.21509439, g: 0.21509439, b: 0.21509439, a: 1}
   - {r: 0.3132075, g: 0.3132075, b: 0.3132075, a: 1}
