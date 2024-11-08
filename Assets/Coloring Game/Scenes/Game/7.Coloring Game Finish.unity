@@ -157,10 +157,10 @@ RectTransform:
   - {fileID: 1334550850}
   m_Father: {fileID: 825516016}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 250, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 125, y: -50}
+  m_SizeDelta: {x: 250, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5844645
 MonoBehaviour:
@@ -743,6 +743,7 @@ GameObject:
   - component: {fileID: 136125181}
   - component: {fileID: 136125183}
   - component: {fileID: 136125182}
+  - component: {fileID: 136125184}
   m_Layer: 0
   m_Name: Cicek1
   m_TagString: Untagged
@@ -778,6 +779,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   texture: {fileID: 2800000, guid: d646bcd5f3a41d141b3ba43d5ac8cff6, type: 3}
+  spriteRenderer: {fileID: 0}
 --- !u!212 &136125183
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -830,6 +832,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &136125184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 136125180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caf44c676b59c7047b1038e838b41801, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dragSpeed: 0.1
+  zoomSpeed: 0.01
+  maxZoom: 2
 --- !u!1 &154378391
 GameObject:
   m_ObjectHideFlags: 0
@@ -1671,6 +1688,7 @@ GameObject:
   - component: {fileID: 296620658}
   - component: {fileID: 296620660}
   - component: {fileID: 296620659}
+  - component: {fileID: 296620661}
   m_Layer: 0
   m_Name: Zurafa
   m_TagString: Untagged
@@ -1706,6 +1724,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   texture: {fileID: 2800000, guid: c4db5b3223a24494497bd4087e23ee26, type: 3}
+  spriteRenderer: {fileID: 0}
 --- !u!212 &296620660
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1758,6 +1777,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &296620661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 296620657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caf44c676b59c7047b1038e838b41801, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dragSpeed: 0.1
+  zoomSpeed: 0.01
+  maxZoom: 2
 --- !u!1 &334824449
 GameObject:
   m_ObjectHideFlags: 0
@@ -2780,10 +2814,10 @@ RectTransform:
   - {fileID: 179797355}
   m_Father: {fileID: 825516016}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 250, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 375, y: -50}
+  m_SizeDelta: {x: 250, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &518475974
 MonoBehaviour:
@@ -4113,6 +4147,7 @@ GameObject:
   - component: {fileID: 774291134}
   - component: {fileID: 774291135}
   - component: {fileID: 774291136}
+  - component: {fileID: 774291137}
   m_Layer: 0
   m_Name: Tavsan
   m_TagString: Untagged
@@ -4200,6 +4235,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   texture: {fileID: 2800000, guid: 45c4987bb0cf656429757b91177eb62f, type: 3}
+  spriteRenderer: {fileID: 0}
+--- !u!114 &774291137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 774291133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caf44c676b59c7047b1038e838b41801, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dragSpeed: 0.1
+  zoomSpeed: 0.01
+  maxZoom: 2
 --- !u!1 &778738987
 GameObject:
   m_ObjectHideFlags: 0
@@ -4451,10 +4502,10 @@ RectTransform:
   - {fileID: 2044911614}
   m_Father: {fileID: 825516016}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 250, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 875, y: -50}
+  m_SizeDelta: {x: 250, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &855963650
 MonoBehaviour:
@@ -5266,6 +5317,7 @@ GameObject:
   - component: {fileID: 1155486690}
   - component: {fileID: 1155486689}
   - component: {fileID: 1155486688}
+  - component: {fileID: 1155486691}
   m_Layer: 0
   m_Name: Maymun
   m_TagString: Untagged
@@ -5286,6 +5338,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   texture: {fileID: 2800000, guid: 39e481f031a7ba44ba60fc76b04961fe, type: 3}
+  spriteRenderer: {fileID: 0}
 --- !u!212 &1155486689
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5353,6 +5406,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 980509039}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1155486691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1155486687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caf44c676b59c7047b1038e838b41801, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dragSpeed: 0.1
+  zoomSpeed: 0.01
+  maxZoom: 2
 --- !u!1 &1213634546
 GameObject:
   m_ObjectHideFlags: 0
@@ -6535,6 +6603,7 @@ GameObject:
   - component: {fileID: 1515910322}
   - component: {fileID: 1515910323}
   - component: {fileID: 1515910324}
+  - component: {fileID: 1515910325}
   m_Layer: 0
   m_Name: Tavsan1
   m_TagString: Untagged
@@ -6622,6 +6691,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   texture: {fileID: 2800000, guid: 63e6f769ad1d0cb4d986eeb9ab1e43b3, type: 3}
+  spriteRenderer: {fileID: 0}
+--- !u!114 &1515910325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1515910321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caf44c676b59c7047b1038e838b41801, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dragSpeed: 0.1
+  zoomSpeed: 0.01
+  maxZoom: 2
 --- !u!1 &1522630550
 GameObject:
   m_ObjectHideFlags: 0
@@ -7170,6 +7255,7 @@ GameObject:
   - component: {fileID: 1596763397}
   - component: {fileID: 1596763396}
   - component: {fileID: 1596763395}
+  - component: {fileID: 1596763398}
   m_Layer: 0
   m_Name: Astronot (2)
   m_TagString: Untagged
@@ -7190,6 +7276,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   texture: {fileID: 2800000, guid: 4c9fcae41034b6646b9884388d4b1559, type: 3}
+  spriteRenderer: {fileID: 0}
 --- !u!212 &1596763396
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7257,6 +7344,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 980509039}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1596763398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1596763394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caf44c676b59c7047b1038e838b41801, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dragSpeed: 0.1
+  zoomSpeed: 0.01
+  maxZoom: 2
 --- !u!1 &1633411211
 GameObject:
   m_ObjectHideFlags: 0
@@ -7268,6 +7370,7 @@ GameObject:
   - component: {fileID: 1633411212}
   - component: {fileID: 1633411214}
   - component: {fileID: 1633411213}
+  - component: {fileID: 1633411215}
   m_Layer: 0
   m_Name: Cicek
   m_TagString: Untagged
@@ -7303,6 +7406,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   texture: {fileID: 2800000, guid: 57363a45c9de93844987f90377aadd96, type: 3}
+  spriteRenderer: {fileID: 0}
 --- !u!212 &1633411214
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7355,6 +7459,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1633411215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1633411211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caf44c676b59c7047b1038e838b41801, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dragSpeed: 0.1
+  zoomSpeed: 0.01
+  maxZoom: 2
 --- !u!1 &1699044104
 GameObject:
   m_ObjectHideFlags: 0
@@ -7389,10 +7508,10 @@ RectTransform:
   - {fileID: 1522630551}
   m_Father: {fileID: 825516016}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 250, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 625, y: -50}
+  m_SizeDelta: {x: 250, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1699044106
 MonoBehaviour:
@@ -7991,6 +8110,7 @@ GameObject:
   - component: {fileID: 1939784303}
   - component: {fileID: 1939784305}
   - component: {fileID: 1939784304}
+  - component: {fileID: 1939784306}
   m_Layer: 0
   m_Name: Astronot
   m_TagString: Untagged
@@ -8026,6 +8146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   texture: {fileID: 2800000, guid: e64df711095563943b40a87f7b5fe733, type: 3}
+  spriteRenderer: {fileID: 0}
 --- !u!212 &1939784305
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8078,6 +8199,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1939784306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1939784302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caf44c676b59c7047b1038e838b41801, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dragSpeed: 0.1
+  zoomSpeed: 0.01
+  maxZoom: 2
 --- !u!1 &1950696766
 GameObject:
   m_ObjectHideFlags: 0
@@ -8464,10 +8600,10 @@ RectTransform:
   - {fileID: 1577510220}
   m_Father: {fileID: 825516016}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 250, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 1125, y: -50}
+  m_SizeDelta: {x: 250, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2006516820
 MonoBehaviour:
@@ -8761,6 +8897,7 @@ GameObject:
   - component: {fileID: 2108672530}
   - component: {fileID: 2108672532}
   - component: {fileID: 2108672531}
+  - component: {fileID: 2108672533}
   m_Layer: 0
   m_Name: Astronot (1)
   m_TagString: Untagged
@@ -8796,6 +8933,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   texture: {fileID: 2800000, guid: 99d41e94e9126174aba470e323d35188, type: 3}
+  spriteRenderer: {fileID: 0}
 --- !u!212 &2108672532
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8848,6 +8986,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2108672533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2108672529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caf44c676b59c7047b1038e838b41801, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dragSpeed: 0.1
+  zoomSpeed: 0.01
+  maxZoom: 2
 --- !u!1 &2124085521
 GameObject:
   m_ObjectHideFlags: 0
@@ -8993,6 +9146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   texture: {fileID: 2800000, guid: 94c169a92068810418445b1a5e875287, type: 3}
+  spriteRenderer: {fileID: 0}
 --- !u!4 &1919759416727802509
 Transform:
   m_ObjectHideFlags: 0
@@ -9019,6 +9173,7 @@ GameObject:
   - component: {fileID: 1919759416727802509}
   - component: {fileID: 7061184007849923669}
   - component: {fileID: 882617227714187164}
+  - component: {fileID: 7061184007849923670}
   m_Layer: 0
   m_Name: Salyangoz
   m_TagString: Untagged
@@ -9078,6 +9233,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7061184007849923670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3006894679746650692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caf44c676b59c7047b1038e838b41801, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dragSpeed: 0.1
+  zoomSpeed: 0.01
+  maxZoom: 2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
